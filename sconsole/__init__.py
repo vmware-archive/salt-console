@@ -1,0 +1,3 @@
+'''
+Initialize the salt console
+'''
