@@ -16,10 +16,10 @@ class Manager(object):
         self.opts = opts
         self.cmdbar = sconsole.cmdbar.CommandBar(self.opts)
         self.header = urwid.LineBox(urwid.Text(('banner', 'Salt Console'), align='center'))
-        self.body = self.body()
+        self.body_frame = self.body()
         self.footer = urwid.AttrMap(urwid.Text(FOOTER), 'banner')
         self.view = urwid.Frame(
-                body=self.body(),
+                body=self.body_frame,
                 header=self.header,
                 footer=self.footer)
 
