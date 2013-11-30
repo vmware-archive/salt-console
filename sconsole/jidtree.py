@@ -32,7 +32,7 @@ class JIDParent(urwid.ParentNode):
         return [1, 2, 3]
 
     def load_child_node(self, key):
-        return JIDNode
+        return JIDNode('node', parent=self, key=key)
 
 
 class JIDView(object):
