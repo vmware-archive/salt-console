@@ -26,7 +26,7 @@ class Manager(object):
                 footer=self.footer)
 
     def body(self):
-        return urwid.Frame(self.jidtree, header=self.cmdbar.grid)
+        return urwid.Frame(self.jidtree.listbox, header=self.cmdbar.grid)
 
     def unhandled_input(self, key):
         if key in ('q', 'Q'):
