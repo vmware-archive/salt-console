@@ -5,6 +5,9 @@ Manage the job tree
 # Import third party libs
 import urwid
 
+# Import sconsole libs
+import sconsole.static
+
 
 class JIDWidget(urwid.TreeWidget):
     '''
@@ -51,3 +54,6 @@ class JIDView(object):
         self.treetop = JIDParent({})
         self.listbox = urwid.TreeListBox(urwid.TreeWalker(self.treetop))
         self.listbox.offset_rows = 1
+
+    def update(self, loop, user_data=None):
+        pass
