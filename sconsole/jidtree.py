@@ -11,7 +11,7 @@ class JIDWidget(urwid.TreeWidget):
     Manage the display of the job return data
     '''
     def get_display_text(self):
-        return 'Widget'
+        return 'Job ID'
 
 
 class JIDNode(urwid.TreeNode):
@@ -29,10 +29,21 @@ class JIDParent(urwid.ParentNode):
         return JIDWidget(self)
 
     def load_child_keys(self):
-        return [1, 2, 3]
+        data = self.get_value()
+        return range(len(data))
 
     def load_child_node(self, key):
-        return JIDNode('node', parent=self, key=key)
+        value = self.get_value()
+        if 'jids' in value:
+            data = value['jids'][key]
+            childclass = JIDParent
+        if 'minions' in value:
+            data = value['minions'][key]
+            childclass = JIDParent
+        else:
+            data = value
+            childclass = JIDNode
+        return childclass(data, parent=self, key=key)
 
 
 class JIDView(object):
