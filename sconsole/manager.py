@@ -40,4 +40,5 @@ class Manager(object):
                 self.view,
                 palette=palette,
                 unhandled_input=self.unhandled_input)
+        loop.set_alarm_in(1, self.jidtree.update)
         loop.run()
