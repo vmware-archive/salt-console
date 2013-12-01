@@ -1,6 +1,16 @@
 '''
 Holds static data components, like the palette
 '''
+import pprint
+
+def tree_seed():
+    return {'jids': [
+                    {'_|-76789876543456787654': [{'localhost': {'return': True}},
+                                                 {'otherhost': {'return': True}}],},
+                    {'_|-76789876543456787655': [{'localhost': {'return': True}},
+                                                 {'otherhost': {'return': True}}],},
+                ],
+           }
 
 def msg(msg, logfile='console_log.txt'):
     '''
@@ -9,7 +19,7 @@ def msg(msg, logfile='console_log.txt'):
     a bit of a damper on this
     '''
     with open(logfile, 'a+') as fp_:
-        fp_.write(str(msg))
+        fp_.write('{0}\n'.format(pprint.pformat(msg)))
 
 
 def get_palette(theme='std'):
