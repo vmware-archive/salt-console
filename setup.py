@@ -49,7 +49,9 @@ kwargs.update(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX :: Linux',
         ],
-    packages=['sconsole'],
+    packages=[
+        'sconsole',
+        'sconsole.widgets'],
     scripts=['scripts/salt-console'],
 )
 
