@@ -1,7 +1,23 @@
 '''
 Holds static data components, like the palette
 '''
+# Import python libs
 import pprint
+
+# Import third party libs
+
+
+# Import sconsole libs
+import sconsole.widgets
+import sconsole.widgets.tree
+
+
+def job_seed(root_txt='Jobs'):
+    '''
+    '''
+    data = [(sconsole.widgets.FocusText(root_txt), [])]
+    return sconsole.widgets.tree.SimpleTree(data)
+
 
 def tree_seed():
     return {'jids': [
@@ -11,6 +27,7 @@ def tree_seed():
                                                  {'otherhost': {'return': True}}],},
                 ],
            }
+
 
 def msg(msg, logfile='console_log.txt'):
     '''
@@ -32,9 +49,19 @@ def get_palette(theme='std'):
     '''
     if theme == 'bright':
         return [
-                ('banner', 'white', 'dark blue')
+                ('banner', 'white', 'dark blue'),
+                ('body', 'black', 'light gray'),
+                ('focus', 'black', 'dark blue', 'standout'),
+                ('bars', 'dark blue', 'light gray', ''),
+                ('arrowtip', 'light blue', 'light gray', ''),
+                ('connectors', 'light red', 'light gray', ''),
                ]
     else:
         return [
-                ('banner', 'white', 'dark blue')
+                ('banner', 'white', 'dark blue'),
+                ('body', 'white', 'black'),
+                ('focus', 'white', 'dark blue', 'standout'),
+                ('bars', 'dark blue', 'light gray', ''),
+                ('arrowtip', 'light blue', 'light gray', ''),
+                ('connectors', 'light red', 'light gray', ''),
                ]
