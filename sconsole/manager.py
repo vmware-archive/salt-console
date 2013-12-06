@@ -4,7 +4,7 @@ import urwid
 # Import sconsole libs
 import sconsole.cmdbar
 import sconsole.static
-import sconsole.jidtree
+import sconsole.jobtree
 
 FOOTER = [
         ('title', 'Salt Console'), '  ',
@@ -17,7 +17,7 @@ class Manager(object):
         self.opts = opts
         self.cmdbar = sconsole.cmdbar.CommandBar(self.opts)
         self.header = urwid.LineBox(urwid.Text(('banner', 'Salt Console'), align='center'))
-        self.jidtree = sconsole.jidtree.JIDView()
+        self.jobtree = sconsole.jobtree.JobTree(self.opts)
         self.body_frame = self.body()
         self.footer = urwid.AttrMap(urwid.Text(FOOTER), 'banner')
         self.view = urwid.Frame(
@@ -26,7 +26,7 @@ class Manager(object):
                 footer=self.footer)
 
     def body(self):
-        return urwid.Frame(self.jidtree.listbox, header=self.cmdbar.grid)
+        return urwid.Frame(self.jobtree.tree, header=self.cmdbar.grid)
 
     def unhandled_input(self, key):
         if key in ('q', 'Q'):
@@ -40,5 +40,5 @@ class Manager(object):
                 self.view,
                 palette=palette,
                 unhandled_input=self.unhandled_input)
-        loop.set_alarm_in(1, self.jidtree.update)
+        loop.set_alarm_in(1, self.jobtree.update)
         loop.run()
