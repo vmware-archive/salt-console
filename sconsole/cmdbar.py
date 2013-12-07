@@ -35,7 +35,7 @@ class CommandBar(object):
                 v_sep=1,
                 align='left')
 
-    def run_command(self, button, user_data):
+    def run_command(self, button):
         '''
         Execute the corresponding salt command
         '''
