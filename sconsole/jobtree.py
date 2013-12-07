@@ -55,7 +55,6 @@ class JobTree(object):
     def new_ret(self, jid, minion, ret):
         subtree = self.new_jid(jid)
         found = False
-        sconsole.static.msg(subtree)
         for minion_wid in subtree[1]:
             if minion_wid.text == minion:
                 # update the return value
@@ -73,11 +72,8 @@ class JobTree(object):
         '''
         while True:
             #TODO: make work with older jid tags
-            sconsole.static.msg('getting event')
             event = self.event.get_event(0.001, 'salt/job', True)
-            sconsole.static.msg(event)
             if event is None:
-                sconsole.static.msg('break')
                 break
             if any(key not in event for key in ('tag', 'data')):
                 continue
