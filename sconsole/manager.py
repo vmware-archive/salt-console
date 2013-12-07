@@ -31,8 +31,15 @@ class Manager(object):
         return urwid.Frame(self.jobbox, header=self.cmdbox)
 
     def unhandled_input(self, key):
-        if key in ('q', 'Q'):
+        if key in ('meta q', 'meta Q'):
             raise urwid.ExitMainLoop()
+        bindings = {'meta t': ['body', 'header', 1],
+                    'meta f': ['body', 'header', 3],
+                    'meta a': ['body', 'header', 5],
+                    'meta j': ['body', 'body'],
+                    'meta g': ['body', 'header', 6]}
+        if key in bindings:
+            self.view.set_focus_path(bindings[key])
 
     def start(self):
         palette = sconsole.static.get_palette(
