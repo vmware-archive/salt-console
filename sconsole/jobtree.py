@@ -54,9 +54,10 @@ class JobTree(object):
 
     def new_ret(self, jid, minion, ret):
         subtree = self.new_jid(jid)
+        sconsole.static.msg(subtree)
         found = False
         for minion_wid in subtree[1]:
-            if minion_wid.text == minion:
+            if minion_wid[0].text == minion:
                 # update the return value
                 found = True
         if not found:
