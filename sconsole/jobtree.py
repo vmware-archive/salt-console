@@ -1,6 +1,9 @@
 '''
 A job tree!
 '''
+# import python libs
+import threading
+
 # Import salt libs
 import salt.utils.event
 import salt.version
@@ -54,7 +57,6 @@ class JobTree(object):
 
     def new_ret(self, jid, minion, ret):
         subtree = self.new_jid(jid)
-        sconsole.static.msg(subtree)
         found = False
         for minion_wid in subtree[1]:
             if minion_wid[0].text == minion:
@@ -67,10 +69,18 @@ class JobTree(object):
                         )
                     )
 
+    def thread_update(self, loop, user_data):
+        '''
+        Fire a thread to run the tree updates
+        '''
+        up_thread = threading.Thread(target=self.update, args=(loop, user_data))
+        up_thread.start()
+
     def update(self, loop, user_data):
         '''
         Read in from the Salt event bus and update the job tree
         '''
+        sconsole.static.msg(threading.currentThread())
         while True:
             #TODO: make work with older jid tags
             event = self.event.get_event(0.001, 'salt/job', True)
@@ -91,4 +101,4 @@ class JobTree(object):
                     event['data']['id'],
                     disp_ret)
             self.tree.refresh()
-        loop.set_alarm_in(0.1, self.update)
+        loop.set_alarm_in(0.1, self.thread_update)
