@@ -1,4 +1,6 @@
 salt-console
 ============
 
-A CLI Console for Salt
+A CLI Console for Salt.
+
+Deprecated.
